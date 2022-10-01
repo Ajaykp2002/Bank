@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+var subjectObject = {
+  "kerala": {
+    "Ernamkulam": ["Aluva", "Kalamasseri", "Kaloor", "Aroor"],
+    "Palakkad":["Alathur","Olavakkode"],
+    "Kozhikode":["Mittayi Therivu","Kannadi"]
+
+  },
+  "Tamilnadu": {
+    "Chennai": ["Vadapazhani", "OMR", "Pallavipuram"],
+
+  }
+}
+window.onload = function() {
+  var subjectSel = document.getElementById("subject");
+  var topicSel = document.getElementById("topic");
+  var chapterSel = document.getElementById("chapter");
+  for (var x in subjectObject) {
+    subjectSel.options[subjectSel.options.length] = new Option(x, x);
+  }
+  subjectSel.onchange = function() {
+    //empty Chapters- and Topics- dropdowns
+    chapterSel.length = 1;
+    topicSel.length = 1;
+    //display correct values
+    for (var y in subjectObject[this.value]) {
+      topicSel.options[topicSel.options.length] = new Option(y, y);
+    }
+  }
+  topicSel.onchange = function() {
+    //empty Chapters dropdown
+    chapterSel.length = 1;
+    //display correct values
+    var z = subjectObject[subjectSel.value][this.value];
+    for (var i = 0; i < z.length; i++) {
+      chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+    }
+  }
+}
+function submitClick()
+        {
+        alert("Submitted Successfully");
+        }
+</script></head>
+<body>
+<h1 align="center">
+    REGISTRATION FORM
+
+</h1>
+<form action="form">
+
+    <input type="text" name="username" placeholder="UserName"><br>
+      <input type="text" name="first_name" placeholder="Enter your first name"><br>
+      <input type="text" name="last_name" placeholder="Enter your last name"><br>
+      <input type="date" name="DOB"><br>
+       Gender:<br>
+      <input type="radio" name="male" value="male">male
+      <input type="radio" name="female" value="female">female<br>
+      <input type="number" name="num" placeholder="enter phone number"><br>
+
+
+    State: <select name="subject" id="subject">
+    <option value="" selected="selected">Select subject</option>
+  </select>
+  <br><br>
+Districts: <select name="topic" id="topic">
+    <option value="" selected="selected">Please select subject first</option>
+  </select>
+  <br><br>
+Branch: <select name="chapter" id="chapter">
+    <option value="" selected="selected">Please select topic first</option>
+  </select>
+  <br>
+
+    Account type:
+     <select name="type" id="A/C type">
+        <option value="savings">savings</option>
+
+         <option value="current">current</option></select><br>
+
+    Materials provided:<br>
+    <input type="checkbox" name="checkbox" value="Debit card">Debit card
+        <input type="checkbox" name="checkbox" value="Credit card">Credit card
+        <input type="checkbox" name="checkbox" value="Cheque book">Cheque book<br>
+    <input type="submit" ONCLICK="submitClick()"><br>
+    <button type="submit"  value="logout"><a href="logout">logout</a></button>
+</form>
+
+
+
+</body>
+</html>
